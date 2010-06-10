@@ -2,7 +2,6 @@
 # The sum of these multiples is 23.
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-N = 1000
-p 1.upto(N-1).inject(0) { |sum, i|
+p 1.upto(999).inject(0) { |sum, i|
   (i % 3 == 0 or i % 5 == 0) ? sum + i : sum
-} #=> 233168
+} # => 233168

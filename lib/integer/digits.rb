@@ -14,6 +14,9 @@ if __FILE__ == $0
     results.report('to_s.chars.map') {
       N.times { |n| n.to_s.chars.map(&:to_i) }
     }
+    results.report('to_s.bytes.map') {
+      N.times { |n| n.to_s.bytes.map(&:to_i) }
+    }
     results.report('log') {
       N.times { |n| n.digits }
     }

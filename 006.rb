@@ -19,5 +19,4 @@ square_of_the_sum = -> n {
 p sum_of_the_square[10] == 385
 p square_of_the_sum[10] == 3025
 
-N = 100
-p square_of_the_sum[N] - sum_of_the_square[N]
+p square_of_the_sum[100] - sum_of_the_square[100]
