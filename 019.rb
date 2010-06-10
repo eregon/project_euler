@@ -16,6 +16,6 @@ How many Sundays fell on the first of the month during the twentieth century (1 
 p (1901..2000).inject(0) { |sum, year|
   sum + (1..12).count { |month|
     Time.utc(year, month, 1).sunday?
-  }#.tap { |v| puts "#{year} #{v}" }
+  }
 }
 # => 171

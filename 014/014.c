@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-long long next_n(long long n) {
+long next_n(long n) {
   return (n%2==0) ? n/2 : 3*n+1;
 }
 
@@ -15,7 +15,7 @@ int main (int argc, char const *argv[])
     i = 1;
     my_n = n;
     while(my_n != 1) {
-      my_n = (my_n%2==0) ? my_n/2 : 3*my_n+1;//next_n(my_n);
+      my_n = (my_n%2==0) ? my_n/2 : 3*my_n+1; // next_n(my_n);
       i++;
     }
     if(i > best_i)

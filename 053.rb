@@ -27,12 +27,9 @@ p C[23,12]
 p C[23,13]
 
 p (23..100).inject(0) { |counter, n|
-  r = n/2
-  if C[n, r] > 1_000_000
+  if C[n, r = n/2] > 1_000_000
     counter += n.odd? ? 2 : 1
-    while r -= 1 and C[n, r] > 1_000_000
-      counter += 2
-    end
+    counter += 2 while r -= 1 and C[n, r] > 1_000_000
   end
   counter
 } # => 4075

@@ -25,6 +25,7 @@
 #   i
 # } # => 837799, 43s->17s
 
+###### Using cache
 # $calc = {}
 # 
 # def sequence(n, i = 1, original = n)
