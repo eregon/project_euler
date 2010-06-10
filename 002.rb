@@ -3,28 +3,11 @@
 # 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 # 
 # Find the sum of all the even-valued terms in the sequence which do not exceed four million.
-# => 4 613 732
 
-MAX = 4_000_000
+require_relative 'lib/fib_enumerator'
 
-fib_enumerator = Enumerator.new { |y|
-  a = b = 1
-  loop {
-    y << a
-    a, b = b, a + b
-  }
-}
-
-# sum = 0
-# loop {
-#   n = fib_enumerator.next
-#   break if n >= MAX
-#   sum += n if n.even?
-# }
-# p sum
-
-p fib_enumerator.inject(0) { |sum, n|
-  break(sum) if n >= MAX
+p FibEnumerator.inject(0) { |sum, n|
+  break(sum) if n >= 4_000_000
   n.even? ? sum + n : sum
-}
+} # => 4 613 732
 
