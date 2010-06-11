@@ -13,14 +13,14 @@ Using words.txt (right click and 'Save Link/Target As...'), a 16K text file cont
 
 class Integer
   @@triangle_numbers = [1]
-  
+
   def expand_triangles_numbers
     n = @@triangle_numbers.size
     @@triangle_numbers << (n*(n+1)>>1)
     # We have to move the 1/2 at the end if we want to avoid integer division.
     # odd*even is always even, so dividing by 2 after is safe
   end
-  
+
   def triangle_number?
     expand_triangles_numbers until @@triangle_numbers[-1] >= self
     @@triangle_numbers.include?(self)

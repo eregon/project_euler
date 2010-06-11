@@ -6,7 +6,7 @@ There are exactly ten ways of selecting three from five, 12345:
 In combinatorics, we use the notation, ^(5)C_(3) = 10.
 
 In general,
-^(n)C_(r) = 	
+^(n)C_(r) =
 n!
 r!(n−r)!
 	,where r ≤ n, n! = n×(n−1)×...×3×2×1, and 0! = 1.

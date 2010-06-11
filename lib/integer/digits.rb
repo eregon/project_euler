@@ -21,7 +21,7 @@ if __FILE__ == $0
       N.times { |n| n.digits }
     }
   end
-  
+
   require "test/unit"
   class TestDigits < Test::Unit::TestCase
     def test_digits

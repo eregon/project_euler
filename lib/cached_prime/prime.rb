@@ -4,7 +4,7 @@ require_relative '../array/binary_search'
 class Integer
   remove_method :prime?
   def prime?
-    CachedPrime.cache.binary_search(self)
+    CachedPrime.cache.binary_search_iterative(self)
   end
 end
 

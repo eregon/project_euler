@@ -32,13 +32,13 @@ class CachedPrime
       end
       primes[0...primes.index(prime)]
     end
-    
+
     def save_cache(primes)
       File.open(CACHE_FILE, "w+") { |fh|
         fh.write(Marshal.dump(primes))
       }
     end
-    
+
     def cache
       @@cache ||= begin
         Marshal.load(File.read(CACHE_FILE))
@@ -52,10 +52,10 @@ end
 
 if __FILE__ == $0
   require "benchmark"
-  
-  #p Benchmark.realtime { CachedPrime.each(1_000_000) {} }
+
+  #p Benchmark.realtime { CachedPrime.each(1_000_000) {} } # To generate
   #exit
-  
+
   N = 1_000_000
   Benchmark.bm(15) do |results|
     results.report('cached') {

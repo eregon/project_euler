@@ -12,7 +12,7 @@ if __FILE__ == $0
       N.times { |n| n.to_s.chars.map(&:to_i).to_i }
     }
   end
-  
+
   require "test/unit"
   class TestDigits < Test::Unit::TestCase
     def test_to_i

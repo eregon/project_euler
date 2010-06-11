@@ -12,7 +12,7 @@ if __FILE__ == $0
       N.!
     }
   end
-  
+
   require "test/unit"
   class TestDigits < Test::Unit::TestCase
     def test_fact

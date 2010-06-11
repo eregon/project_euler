@@ -31,7 +31,7 @@ class BigDecimal
       (1..MAX_SEQ_LENGTH).each { |len|
         verify = len < 4 ? 4 : 2
         sequences = ss.each_slice(len).take(verify)
-        
+
         return len if sequences.uniq.size == 1 or (len > PRECISION/2 && sequences[1].size > MIN_COMMON && sequences[0][0...sequences[1].size-1] == sequences[1][0..-2] && (p :short_circuit))
       }
       raise "too big #{self}" if i > chars.size/3

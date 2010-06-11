@@ -16,7 +16,7 @@ require_relative 'lib/integer/digits'
 
 DIGITS = 5
 p a=(2..10**(DIGITS+1)-1).select { |n|
-    n.digits.inject(0) { |sum, digit| sum + digit**DIGITS } == n 
+    n.digits.inject(0) { |sum, digit| sum + digit**DIGITS } == n
 } # => [4150, 4151, 54748, 92727, 93084, 194979]
 p a.reduce(:+) # => 443839
 

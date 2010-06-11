@@ -21,6 +21,6 @@ class Integer
 end
 
 p CachedPrime.each(1_000_000).select { |prime|
-  p prime if prime.circular_prime?
-}.size # => 55, 1.7s vs 10s (7s with CachedPrime.each, without better .prime?)
+  prime.circular_prime?
+}.size # => 55, 1.5s vs 10s (7s with CachedPrime.each, without better .prime?)
 

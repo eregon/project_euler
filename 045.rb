@@ -6,7 +6,7 @@ Hexagonal 	  	H_(n)=n(2n−1) 	  	1, 6, 15, 28, 45, ...
 
 It can be verified that T_(285) = P_(165) = H_(143) = 40755.
 
-Find the next triangle number that is also pentagonal and hexagonal.  
+Find the next triangle number that is also pentagonal and hexagonal.
 =end
 
 class NumberSet
@@ -16,7 +16,7 @@ class NumberSet
     @i = 0
     find_next
   end
-  
+
   def find_next
     @i += 1
     @last = @formula[@i]

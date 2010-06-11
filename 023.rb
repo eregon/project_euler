@@ -21,7 +21,7 @@ class Integer
     }
     divisors.sort.uniq
   end
-  
+
   def abundant?
     divisors.reduce(:+) > self
   end
@@ -37,7 +37,7 @@ abundant_numbers.map { |n| n*2 } # with itself
 p :array_of_abundant_number_sum_created
 
 #(1..LIMIT).select { |n|
-#  (n.odd? or !abundant_numbers.include?(n/2)) and 
+#  (n.odd? or !abundant_numbers.include?(n/2)) and
 #}
 
 p ((1..LIMIT).to_a-abundant_numbers_sums).reduce(:+) # => 4179871
