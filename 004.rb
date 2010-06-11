@@ -5,10 +5,11 @@
 DIGITS = 3
 the_biggest_int_of_digits = 10**DIGITS-1
 
+require_relative 'lib/integer/palindrome'
 p the_biggest_int_of_digits.downto(the_biggest_int_of_digits-10).map { |biggest_int_of_digits|
   biggest_int_of_digits.downto(1) { |i|
     product = biggest_int_of_digits*i
-    break([biggest_int_of_digits, i, product]) if product.to_s == product.to_s.reverse
+    break([biggest_int_of_digits, i, product]) if product.palindrome?
   }
 }.max_by { |a, i, p| p.to_i }
 
@@ -16,6 +17,6 @@ p the_biggest_int_of_digits.downto(the_biggest_int_of_digits-10).map { |biggest_
 p 999.times.each_with_object([]) { |a, palindromes|
   999.times { |b|
     prod = a*b
-    palindromes << prod if prod.to_s == prod.to_s.reverse
+    palindromes << prod if prod.palindrome?
   }
-}.max
+}.max # => 906609
