@@ -17,4 +17,33 @@ Considering quadratics of the form:
 Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
 =end
 
+require_relative 'lib/cached_prime'
+
+def number_of_primes(a, b)
+  #equation = -> a, b, n { n**2 + a*n + b }
+  n = 0
+  #while equation[a,b,n].prime?
+  while (n**2 + a*n + b).prime?
+    n += 1
+  end
+  n-1
+end
+
+p number_of_primes(1, 41) == 39
+p number_of_primes(-79, 1601) == 79
+
+a, b, primes = (-999..999).map { |a|
+  p a if a%100 == 0
+  best_b = (-999..999).max_by { |b|
+    number_of_primes(a, b)
+  }
+  [a, best_b, number_of_primes(a, best_b)]
+}.max_by(&:last)
+p [a, b, primes]
+p a*b
+__END__
+[-61, 971, 70]
+-59231
+
+40s => 28s
 
