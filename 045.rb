@@ -9,6 +9,7 @@ It can be verified that T_(285) = P_(165) = H_(143) = 40755.
 Find the next triangle number that is also pentagonal and hexagonal.
 =end
 
+
 class NumberSet
   attr_reader :last
   def initialize(&block)
@@ -18,21 +19,20 @@ class NumberSet
   end
 
   def find_next
-    @i += 1
-    @last = @formula[@i]
+    @last = @formula[@i += 1]
   end
 end
 
-triangle = NumberSet.new { |n| n*(n+1)/2 }
-pentagonal = NumberSet.new { |n| n*(3*n-1)/2 }
-hexagonal = NumberSet.new { |n| n*(2*n-1) }
+triangle = NumberSet.new { |n| (n*n + n)/2 } # n*(n+1)/2 }
+pentagonal = NumberSet.new { |n| (3*n*n-n)/2 } # n*(3*n-1)/2 }
+hexagonal = NumberSet.new { |n| 2*n*n - n } # n*(2*n-1) }
 sets = [triangle, pentagonal, hexagonal]
 
-p (40755+1..100_000_000).each { |n|
-  p n if n % 10**6 == 0
+# too slow in Ruby, I had to do in C
+p (1_533_000_000..10_000_000_000).find { |n|
   sets.each { |nset|
     nset.find_next until nset.last >= n
   }
-  break(n) if sets.all? { |nset| nset.last == n }
-}
-p sets
+  sets.all? { |nset| nset.last == n }
+} # => 1_533_776_805
+
