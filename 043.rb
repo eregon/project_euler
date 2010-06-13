@@ -14,16 +14,9 @@ Let d_(1) be the 1^(st) digit, d_(2) be the 2^(nd) digit, and so on. In this way
 Find the sum of all 0 to 9 pandigital numbers with this property.
 =end
 
-require_relative 'lib/integer/digits'
 require_relative 'lib/array/to_i'
 require_relative 'lib/cached_prime/prime'
-
-class Integer
-  def pandigital?
-    digits = digits()
-    digits.uniq == digits && digits.sort == (0...digits.size).to_a
-  end
-end
+require_relative 'lib/integer'
 
 def ss_divisible?(digits)
   @@ss_primes ||= CachedPrime.each(17).to_a
@@ -32,8 +25,8 @@ def ss_divisible?(digits)
   }
 end
 
-p 1406357289.pandigital?
-p 1406357288.pandigital?
+p 1406357289.zero_pandigital?
+p 1406357288.zero_pandigital?
 
 p ss_divisible?(1406357289.digits)
 p ss_divisible?(1406357298.digits)
@@ -61,9 +54,9 @@ def pandigitals(size, &b)
 end
 
 puts
-p (101..300).select { |i| i.pandigital? }.reverse == pandigitals(3).to_a
+p (101..300).select { |i| i.zero_pandigital? }.reverse == pandigitals(3).to_a
 p 3.times.to_a.permutation(3).to_a.reject { |p| p[0] == 0 }.map(&:to_i).reverse == pandigitals(3).to_a
-p (1023..4000).select { |i| i.pandigital? }.reverse == pandigitals(4).to_a
+p (1023..4000).select { |i| i.zero_pandigital? }.reverse == pandigitals(4).to_a
 =end
 
 puts

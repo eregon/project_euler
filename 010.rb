@@ -3,7 +3,6 @@
 
 #require "prime"
 require_relative 'lib/cached_prime'
-p CachedPrime.inject { |sum, prime|
-  break(sum) if prime > 2_000_000
+p CachedPrime.each(2_000_000).inject { |sum, prime|
   sum + prime
 } # => 142913828922, 0.16s vs 7.41s

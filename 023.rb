@@ -10,20 +10,11 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 
 LIMIT = 28123
 
-class Integer
-  def divisors
-    divisors = [1]
-    2.upto(Math.sqrt(self).to_i) { |d|
-      if self % d == 0
-        divisors << d << self/d
-        # I don't care of the case when it's the root actually
-      end
-    }
-    divisors.sort.uniq
-  end
+require_relative 'lib/integer'
 
+class Integer
   def abundant?
-    divisors.reduce(:+) > self
+    proper_divisors.reduce(:+) > self
   end
 end
 

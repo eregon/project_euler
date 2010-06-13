@@ -6,15 +6,8 @@ For example, 2143 is a 4-digit pandigital and is also prime.
 What is the largest n-digit pandigital prime that exists?
 =end
 
-require_relative 'lib/integer/digits'
+require_relative 'lib/integer'
 require_relative 'lib/array/to_i'
-
-class Integer
-  def pandigital?
-    digits = digits()
-    digits.uniq == digits && digits.sort == (1..digits.size).to_a
-  end
-end
 
 def main
   (3..9).reverse_each { |digits|

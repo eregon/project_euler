@@ -50,6 +50,8 @@ class CachedPrime
   end
 end
 
+Dir[File.join(File.dirname(__FILE__), File.basename(__FILE__, '.rb'), '*.rb')].each { |f| require f }
+
 if __FILE__ == $0
   require "benchmark"
 
