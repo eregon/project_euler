@@ -7,8 +7,42 @@ The text file, keylog.txt, contains fifty successful login attempts.
 Given that the three characters are always asked for in order, analyse the file so as to determine the shortest possible secret passcode of unknown length.
 =end
 
-tries = File.read('data/keylog.txt').lines.map(&:to_i)
+require_relative 'lib/integer'
 
-tries.uniq.each { |i|
-  p i
-}
+# Using a strategy to find the digit which is always the last
+
+tries = File.read('data/keylog.txt').lines.map { |line| line.to_i.digits }
+digits = tries.reduce(:|).sort
+
+puts digits.size.times.with_object([]) { |_,key|
+  last_digit = digits.find { |digit|
+    tries.all? { |try|
+      i = try.rindex(digit)
+      i.nil? or i == try.size-1
+    }
+  }
+  break if last_digit.nil?
+  key.unshift(last_digit)
+  digits.delete(last_digit)
+  tries.each { |try| try.delete(last_digit) }
+}.join
+
+
+##### The same, but with the first
+
+tries = File.read('data/keylog.txt').lines.map { |line| line.to_i.digits }
+digits = tries.reduce(:|).sort
+
+puts digits.size.times.with_object([]) { |_,key|
+  last_digit = digits.find { |digit|
+    tries.all? { |try|
+      i = try.index(digit)
+      i.nil? or i == 0
+    }
+  }
+  break if last_digit.nil?
+  key << last_digit
+  digits.delete(last_digit)
+  tries.each { |try| try.delete(last_digit) }
+}.join
+
