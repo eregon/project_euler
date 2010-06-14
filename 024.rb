@@ -9,6 +9,5 @@ The lexicographic permutations of 0, 1 and 2 are:
 What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 =end
 
-N = 9
-p (0..N).to_a.permutation(N+1).take(1_000_000).last.join.to_i #=> 2783915460
+p 10.times.to_a.permutation(10).take(1_000_000).last.join.to_i #=> 2783915460
 
