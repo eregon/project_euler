@@ -1,0 +1,11 @@
+= Project Euler
+This is my solutions of Project Euler in Ruby.
+C is used in the rare cases it is necessary.
+
+It is written in very recent Ruby, so you likely need a trunk(or 1.9.2) build to run them.
+
+Scripts taking more than one second have their times written next to the result.
+
+My aim is to show examples of the usage of Ruby in such problems.
+
+If you are trying to solve some Euler Project's problems, please search on your own first ;)
