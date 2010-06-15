@@ -21,8 +21,7 @@ require_relative 'lib'
 # 2 + 1/( 3+1/( 4 ) )
 # 2 + Rational(1,3 + Rational(1,4) )
 def continued_fraction(numbers)
-  last = numbers.pop
-  numbers.reverse_each.inject(last) { |r, n|
+  numbers.reverse_each.inject(numbers.pop) { |r, n|
     n + Rational(1, r)
   }
 end
