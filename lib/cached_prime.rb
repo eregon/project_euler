@@ -2,6 +2,7 @@ require "prime"
 
 class CachedPrime
   CACHE_FILE = File.expand_path("../cached_prime/data.primes.marshal", __FILE__)
+  STEP = 1_000_000
   @@cache = nil
   class << self
     include Enumerable
@@ -39,13 +40,19 @@ class CachedPrime
       }
     end
 
-    def cache
+    def cache(max = nil)
       @@cache ||= begin
         Marshal.load(File.read(CACHE_FILE))
       rescue
         save_cache([Prime.first])
         retry
       end
+      if !max.nil? and @@cache.last < max
+        to = (max/STEP+1).to_i*STEP
+        puts "Generating primes up to #{to}"
+        @@cache = each(to).to_a
+      end
+      @@cache
     end
   end
 end

@@ -5,7 +5,7 @@
 DIGITS = 3
 the_biggest_int_of_digits = 10**DIGITS-1
 
-require_relative 'lib/integer/palindrome'
+require_relative 'lib'
 p the_biggest_int_of_digits.downto(the_biggest_int_of_digits-10).map { |biggest_int_of_digits|
   biggest_int_of_digits.downto(1) { |i|
     product = biggest_int_of_digits*i

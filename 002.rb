@@ -4,7 +4,7 @@
 #
 # Find the sum of all the even-valued terms in the sequence which do not exceed four million.
 
-require_relative 'lib/fib_enumerator'
+require_relative 'lib'
 
 p FibEnumerator.inject(0) { |sum, n|
   break(sum) if n >= 4_000_000

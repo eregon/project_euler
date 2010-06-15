@@ -22,7 +22,7 @@ n = <<EON
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 EON
-require_relative 'lib/integer/digits'
+require_relative 'lib'
 p n.to_i.digits.each_cons(5).map { |digits|
   digits.reduce(:*)
 }.max
