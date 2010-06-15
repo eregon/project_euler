@@ -46,7 +46,7 @@ triangle = <<EOS
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 EOS
 
-triangle = <<EOS
+triangle2 = <<EOS
 3
 7 4
 2 4 6
@@ -55,30 +55,47 @@ EOS
 
 triangle = triangle.lines.map { |line| line.chomp.split(' ').map(&:to_i) }
 
-class Way
-  attr_accessor :index, :sum
-  def initialize(index)
-    @index = index
-    @sum = 0
+class Node
+  attr_reader :value
+  attr_accessor :neighbours, :visited
+  alias :weight :value
+  def initialize(value)
+    @value = value
+    @neighbours = []
+    @visited = false
   end
-  def + n
-    @sum += n
-    self
+
+  def to_s
+    "#{@value}#{ " [#{@neighbours.map(&:value) * ','}]" if !@neighbours.empty? }"
   end
 end
+nodes = triangle.map { |row| row.map { |node| Node.new(node) } }
+nodes[0...-1].each_with_index { |row, r|
+  row.each_with_index { |node, n|
+    node.neighbours = [nodes[r+1][n], nodes[r+1][n+1]].uniq
+  }
+}
+source = nodes[0][0]
 
-# p triangle.each_with_object([Way.new(0)]) { |line, ways|
-#   ways.each { |way|
-#     index = way.index
-#     max = line[index..index+1].max
-#     way.index = line.index(max)
-#     if line[index] == line[index+1]
-#       other_way = Way.new(line.rindex(max))
-#       other_way.sum = way.sum + max
-#       ways << other_way
-#     end
-#     way + max
-#   }
-# }#.max_by(&:sum)
+def longest_path(node, sum = node.weight, distances = Hash.new(0))
+  distances[node] = sum if distances[node] < sum
 
+  node.neighbours.each { |n|
+    longest_path(n, sum + n.weight, distances)
+  }
+  distances
+end
 
+distances = longest_path(source)
+p distances.values.max
+
+puts
+### Another way, faster
+rows = triangle.map(&:dup)
+rows[0...-1].each_with_index.reverse_each { |row, i|
+  row.each_index { |j|
+    row[j] += rows[i+1][j..j+1].max
+  }
+}
+
+p rows[0][0] # => 1074

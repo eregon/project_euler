@@ -5,6 +5,10 @@ class Integer
     n, digits[digits.size] = n.divmod(10) until n == 0
     digits.reverse
   end
+
+  def ndigits
+    abs.to_s.size
+  end
 end
 
 if __FILE__ == $0
