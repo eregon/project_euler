@@ -21,8 +21,18 @@ if __FILE__ == $0
     results.report('to_s.bytes.map') {
       N.times { |n| n.to_s.bytes.map(&:to_i) }
     }
-    results.report('log') {
+    results.report('divmod') {
       N.times { |n| n.digits }
+    }
+  end
+
+  M = 1_000_000
+  Benchmark.bmbm(15) do |results|
+    results.report('abs.to_s.size') {
+      M.times { |n| n.ndigits }
+    }
+    results.report('log') {
+      M.times { |n| n == 0 ? 1 : Math.log10(n.abs).floor + 1 }
     }
   end
 
