@@ -77,24 +77,6 @@ class Proc
   end
 end
 
-class Hand < Array
-  def initialize(cards)
-    super(cards)
-  end
-
-  def values
-    map(&:value)
-  end
-
-  def uvalues
-    values.uniq
-  end
-
-  def nvalues
-    uvalues.size
-  end
-end
-
 class Game
   HANDS = {
     royal_flush: -> {
@@ -132,7 +114,7 @@ class Game
 
   attr_reader :cards
   def initialize(player1cards, player2cards)
-    @cards = {p1: Hand.new(player1cards), p2: Hand.new(player2cards)}
+    @cards = {p1: player1cards, p2: player2cards}
   end
 
   def result(player)
