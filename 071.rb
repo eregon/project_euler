@@ -18,7 +18,7 @@ min, target = Rational(0), Rational(3,7)
     rationals << Rational(n, d) if n.gcd(d) == 1
   }
   if Math.log10(d) % 1 == 0 or d % 100_000 == 0
-    puts "Updating min,max at d=#{d}"
+    puts "Updating min at d=#{d}"
     rationals = SortedSet.new(rationals.to_a[-2..-2]) if d == 10 # We need to remove *target* at the first time
     rationals = SortedSet.new [min = rationals.to_a.last]
     puts "min is now #{min}"
@@ -26,3 +26,11 @@ min, target = Rational(0), Rational(3,7)
 }
 
 puts rationals.to_a.last # => 428570/999997, 8s
+
+#### With Farey Sequence
+a = Rational(0)
+while a.denominator < 1_000_000
+  last = a
+  a = Rational(a.numerator + 3, a.denominator + 7)
+end
+puts last
