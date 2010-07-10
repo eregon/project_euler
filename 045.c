@@ -13,7 +13,7 @@ int main (int argc, char const *argv[])
   long triangle = TRIANGLE(++triangle_i);
   long pentagonal = PENTAGONAL(++pentagonal_i);
   long hexagonal = HEXAGONAL(++hexagonal_i);
-  
+
   long n;
   const long max = pow(10, 10);
   for(n = 40755+1; n < max; ++n)
@@ -36,6 +36,6 @@ int main (int argc, char const *argv[])
     }
   }
   printf("%ld\n", n); // 1533776805, 8.23s
-  
+
   return 0;
 }

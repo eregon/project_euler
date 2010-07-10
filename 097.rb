@@ -11,29 +11,24 @@ Find the last ten digits of this prime number.
 #n = 28433 * 2**7830457 + 1
 #p = 2**7830457
 
-require "prime"
-#p Prime.prime_division(7830457+1) # => [[2, 1], [37, 1], [105817, 1]]
-
-#10.times { |i| puts "#{i}: #{2**i}" }
+require_relative 'lib'
 
 class Integer
   def int_pow(power)
     add = 0
-    until (primes_divisors = Prime.prime_division(power)).size > 1
+    until (primes_factors = power.prime_factors).size > 1
       power += 1
       add += 1
     end
-    primes_divisors = primes_divisors.reverse.inject([]) { |pd, (prime, p_pow)| pd + [prime]*p_pow }
-    n = primes_divisors.inject(self) { |n, prime| n ** prime } # ([n ** prime]*p_pow).reduce(:*) }
-    n /= 2**add
-    n
+    primes_factors = primes_factors.reverse.inject([]) { |pd, (prime, p_pow)| pd + [prime]*p_pow }
+    n = primes_factors.inject(self) { |n, prime| n ** prime }
+    n / 2**add
   end
 end
 
 #p 2*37*105817
 power = (((2 ** 105817) ** 37) ** 2) / 2
 n = 28433*power + 1
-p :n_computed
 
 n = 28433*(2.int_pow(7830457)) + 1
 

@@ -25,6 +25,6 @@ int main (int argc, char const *argv[])
     }
   }
   printf("%d", (int) best_n); // 1.43s -> 1.27s
-  
+
   return 0;
 }

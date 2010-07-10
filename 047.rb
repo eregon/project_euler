@@ -13,8 +13,8 @@ The first three consecutive numbers to have three distinct prime factors are:
 Find the first four consecutive integers to have four distinct primes factors. What is the first of these numbers?
 =end
 
-require "prime"
+require_relative 'lib'
 CONS = 4
 p (1..1_000_000).each_cons(CONS).find { |cons|
-  cons.all? { |n| Prime.prime_division(n).size >= CONS }
-} # => [134043, 134044, 134045, 134046]
+  cons.all? { |n| n.prime_factors.size >= CONS }
+} # => [134043, 134044, 134045, 134046], 7.77s
