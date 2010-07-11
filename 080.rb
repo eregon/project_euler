@@ -12,7 +12,7 @@ require "bigdecimal/math"
 include BigMath
 
 def digital_sum_of_100_decimals(n)
-  n.to_s('F').delete(?.)[0...100].chars.inject(0) { |sum, chr| sum + chr.to_i }
+  n.to_s('F')[0..100].chars.inject(0) { |sum, chr| sum + chr.to_i }
 end
 
 def sqrt_of(n)
