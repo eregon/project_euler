@@ -19,4 +19,4 @@ square_of_the_sum = -> n {
 p sum_of_the_square[10] == 385
 p square_of_the_sum[10] == 3025
 
-p square_of_the_sum[100] - sum_of_the_square[100]
+p square_of_the_sum[100] - sum_of_the_square[100] # => 25164150
