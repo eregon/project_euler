@@ -25,7 +25,7 @@ require_relative 'lib'
 p (2..1000).max_by { |d|
   p d if d % 100 == 0
   (2..1_000_000).find(->{0}) { |x|
-    (Math.sqrt((x*x - 1).to_f/d)).integer?
+    (Math.sqrt((x*x - 1).to_f/d)).whole?
   }
 }
 # 339

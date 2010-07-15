@@ -2,6 +2,4 @@
 # Find the sum of all the primes below two million.
 
 require_relative 'lib'
-p CachedPrime.each(2_000_000).inject { |sum, prime|
-  sum + prime
-} # => 142913828922, 0.16s vs 7.41s
+p CachedPrime.each(2_000_000).reduce(:+) # => 142913828922, 0.16s vs 7.41s

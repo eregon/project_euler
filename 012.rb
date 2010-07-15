@@ -46,8 +46,8 @@ p loop {
 i = n = 0
 p loop {
   n += (i += 1)
-  break(n) if (1..Math.sqrt(n).to_i).count { |d| (n%d).zero? } > 250
+  break(n) if (1..Math.sqrt(n).to_i).count { |d| n%d == 0 } > 250
   # Wow, removing the #to_i here ^ makes it almost 2 times slower(19s) :O
-} # 11.1s
+} # 8.5s
 
 

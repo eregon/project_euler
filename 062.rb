@@ -10,7 +10,7 @@ p (10**8..5*10**8).find { |n|
   p n if n%10_000 == 0
   cubes = []
   n.digits.permutation(n.ndigits).count { |digits|
-    if cube = digits.to_i and !cubes.include?(cube) and Math.cbrt(cube).integer?
+    if cube = digits.to_i and !cubes.include?(cube) and Math.cbrt(cube).whole?
       cubes << cube
     end
   } == 5

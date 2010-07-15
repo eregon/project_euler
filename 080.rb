@@ -20,7 +20,7 @@ def sqrt_of(n)
 end
 
 p (1...100).reject { |n|
-  Math.sqrt(n).integer?
+  Math.sqrt(n).whole?
 }.inject(0) { |sum, n|
   sum + digital_sum_of_100_decimals(sqrt_of(n))
 } # => 40886

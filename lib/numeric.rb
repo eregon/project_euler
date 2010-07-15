@@ -1,5 +1,5 @@
 class Numeric
-  def integer?
+  def whole?
     self == to_i
   end
 end
