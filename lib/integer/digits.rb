@@ -6,6 +6,13 @@ class Integer
     digits.reverse
   end
 
+  def reverse_digits
+    return [0] if self == 0
+    n, digits = abs, []
+    n, digits[digits.size] = n.divmod(10) until n == 0
+    digits
+  end
+
   def ndigits
     abs.to_s.size
   end
