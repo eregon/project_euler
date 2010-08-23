@@ -63,20 +63,19 @@ end
 # With Memoize
 class Method
   def memoize
-    name = name()
-    org = "org_#{name}"
+    method = name
+    original = "org_#{name}"
     cache = {}
-    Object.class_eval {
-      alias_method(org, name)
-      define_method(name) { |arg|
+    owner.class_eval {
+      alias_method original, method
+      define_method(method) { |arg|
         if cache.key? arg
           cache[arg]
         else
-          cache[arg] = send(org, arg)
+          cache[arg] = send(original, arg)
         end
       }
     }
-    self
   end
 
   def memoize2
