@@ -139,7 +139,7 @@ end
 __END__
                           user     system      total      real
 recursive (no cached)  0.430000   0.000000   0.430000 (0.429842)
-memoize                0.070000   0.010000   0.080000 (0.085660)
+memoize                0.070000   0.010000   0.080000 (0.085660) 0.35 if multi-args
 memoize2               0.580000   0.000000   0.580000 (0.589766)
 internal cache         0.090000   0.000000   0.090000 (0.093896)
 
