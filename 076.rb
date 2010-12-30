@@ -11,16 +11,29 @@ It is possible to write five as a sum in exactly six different ways:
 How many different ways can one hundred be written as a sum of at least two positive integers?
 =end
 
-# From http://d.hatena.ne.jp/htz/20090304/1236177176
-def solv(coins, pence)
-  @solv_cache ||= {}
-  return 1 if coins.size == 1
-  @solv_cache[[coins.size, pence]] ||= begin
-    coins = coins.dup
-    first_coin = coins.shift
-    (0..pence/first_coin).inject(0) { |count, i|
-      count + solv(coins, pence - i*first_coin)
+# P(n) partition function
+# Euler's recurrence equation (http://mathworld.wolfram.com/PartitionFunctionP.html)
+
+P = Hash.new { |h,n| # Easiest cache ever !
+  h[n] = if n < 0
+    0
+  elsif n == 0
+    1
+  else
+    (1..n).inject(0) { |sum, k|
+      sum + (-1)**(k+1) * (P[n - k*(3*k-1)/2] + P[n - k*(3*k+1)/2])
     }
   end
+}
+
+def ways_for(n)
+  P[n] - 1 # remove [n]
 end
-p solv((1..99).to_a, 100) # => WRONG: 1642992565
+
+# 1: 1 => 0
+# 2: 1+1 => 1
+# 3: 1+1+1, 2+1 => 2
+# 4: 1+1+1+1, 2+1+1, 2+2, 3+1 => 4
+# 5 => 6
+
+p ways_for(100) # 0.03s
