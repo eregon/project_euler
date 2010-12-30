@@ -75,7 +75,8 @@ module Monopoly
 
   class Property
     extend Monopoly
-    attr_reader :name, :position, :count
+    attr_reader :name, :position
+    attr_accessor :count
     def initialize(name, position)
       @name, @position = name, position
       @count = 0
@@ -134,6 +135,17 @@ module Monopoly
       end
     end
 
+    def dump_data
+      @properties.map(&:count)
+    end
+
+    def load_data(properties)
+      p @properties.map(&:count)
+      @properties.zip(properties) { |property, add|
+        property.count += add
+      }
+    end
+
     def results
       results = @properties.sort_by(&:count).reverse
       all = @properties.map(&:count).reduce(:+)
@@ -151,13 +163,33 @@ end
 
 game = Monopoly::Board.new
 profiling = $".find { |f| File.basename(f) == 'profile.rb' }
-game.simulate(profiling ? 2_000 : 1_000_000)
+N = profiling ? 2_000 : 1_000_000
 
-results = game.results
-puts "modal string:"
-puts results[0...3].map { |p| "%.2d" % p.position }.join
+# The issue is they both start from the 'GO' case, but with N big, it tends to have minimal impact
+from_subprocess, to_parent = IO.pipe
+if pid = fork # parent
+  game.simulate(N/2)
+
+  to_parent.close
+  r = from_subprocess.read
+  from_subprocess.close
+  data = Marshal.load(r.unpack("m")[0])
+
+  game.load_data(data)
+
+  results = game.results
+  puts "modal string:"
+  puts results[0...3].map { |p| "%.2d" % p.position }.join
+else # child
+  from_subprocess.close
+  game.simulate(N/2)
+  data = game.dump_data
+  to_parent.puts [Marshal.dump(data)].pack("m")
+  exit!
+end
+
 # => 200_000 with 2d6: 102400, 0.33 (org: 1.13)
 # => 600_000 with 2d6: 102400, 0.91
 
-# => 600_000 with 2d4: 101524, 0.89
-# => 1_000_000 with 2d4: 101524, 1.48 (1.8.7: 5.3)
+# => 600_000 with 2d4: 101524, 0.89 ==> 0.49
+# => 1_000_000 with 2d4: 101524, 1.48 (1.8.7: 5.3) ==> 0.80
